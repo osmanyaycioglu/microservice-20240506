@@ -1,10 +1,10 @@
 package org.training.microservice.msorder.rest;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.training.microservice.msorder.error.ErrorObj;
 import org.training.microservice.msorder.rest.models.Order;
 import org.training.microservice.msorder.services.IOrderManagementService;
 import org.training.microservice.msorder.services.OrderManagementService;
@@ -17,16 +17,24 @@ public class OrderManagementController {
 
 
     @PostMapping("/place")
-    public String place(@RequestBody Order orderParam) {
+    public String place(@RequestBody @Valid Order orderParam) {
         return orderManagementService.place(orderParam);
     }
 
     @PostMapping("/place2")
-    public void place2() {
+    public String place2(@RequestBody @Valid Order orderParam) {
+        return orderManagementService.place2(orderParam);
+    }
+
+    @PostMapping("/place3")
+    public String place3(@RequestBody @Valid Order orderParam) {
+        return orderManagementService.place3(orderParam);
     }
 
     @PostMapping("/suspend")
     public void suspend() {
     }
+
+
 
 }

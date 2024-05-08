@@ -60,6 +60,11 @@
         </dependency>
         <dependency>
             <groupId>org.training.microservice</groupId>
+            <artifactId>ms-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.training.microservice</groupId>
             <artifactId>ms-restaurant-api</artifactId>
             <version>1.0.0</version>
         </dependency>

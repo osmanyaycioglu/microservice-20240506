@@ -9,4 +9,14 @@ public class OrderManagementService2 implements IOrderManagementService{
     public String place(final Order orderParam) {
         return "abc";
     }
+
+    @Override
+    public String place2(final Order orderParam) {
+        return null;
+    }
+
+    @Override
+    public String place3(final Order orderParam) {
+        return null;
+    }
 }

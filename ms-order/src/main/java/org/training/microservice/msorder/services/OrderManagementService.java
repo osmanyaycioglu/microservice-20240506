@@ -17,4 +17,16 @@ public class OrderManagementService implements IOrderManagementService{
         ReserveResponse reserveLoc = restaurantReserveIntegration.reserve(orderParam);
         return reserveLoc.getDesc();
     }
+
+    @Override
+    public String place2(final Order orderParam) {
+        ReserveResponse reserveLoc = restaurantReserveIntegration.reserve2(orderParam);
+        return reserveLoc.getDesc();
+    }
+
+    @Override
+    public String place3(final Order orderParam) {
+        ReserveResponse reserveLoc = restaurantReserveIntegration.reserve3(orderParam);
+        return reserveLoc.getDesc();
+    }
 }
