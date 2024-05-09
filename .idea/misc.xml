@@ -11,6 +11,7 @@
         <option value="$PROJECT_DIR$/ms-restaurant/pom.xml" />
         <option value="$PROJECT_DIR$/ms-restaurant-api/pom.xml" />
         <option value="$PROJECT_DIR$/ms-common/pom.xml" />
+        <option value="$PROJECT_DIR$/apigw-order/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />
