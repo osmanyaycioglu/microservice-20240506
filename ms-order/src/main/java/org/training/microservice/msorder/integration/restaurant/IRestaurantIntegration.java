@@ -7,7 +7,7 @@ import org.training.microservice.msrestaurant.rest.ICookManagementController;
 import org.training.microservice.msrestaurant.rest.models.ReserveRequest;
 import org.training.microservice.msrestaurant.rest.models.ReserveResponse;
 
-@FeignClient("RESTAURANT")
+@FeignClient(value = "RESTAURANT",contextId = "a1")
 public interface IRestaurantIntegration extends ICookManagementController {
 
 }

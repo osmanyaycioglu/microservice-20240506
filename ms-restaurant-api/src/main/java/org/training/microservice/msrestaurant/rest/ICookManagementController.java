@@ -11,4 +11,5 @@ public interface ICookManagementController {
 
     @PostMapping("/api/v1/cook/management/reserve")
     ReserveResponse reserve(@RequestBody ReserveRequest reserveRequest);
+
 }

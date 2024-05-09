@@ -5,21 +5,18 @@ import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import com.netflix.discovery.shared.Application;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 import org.training.microservice.mscommon.error.ErrorObj;
-import org.training.microservice.msorder.rest.models.Order;
+import org.training.microservice.msorder.rest.models.OrderDto;
+import org.training.microservice.msorder.services.models.Order;
 import org.training.microservice.msrestaurant.rest.models.Meal;
 import org.training.microservice.msrestaurant.rest.models.ReserveRequest;
 import org.training.microservice.msrestaurant.rest.models.ReserveResponse;
 
-import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
@@ -72,7 +69,6 @@ public class RestaurantReserveIntegration {
     }
 
 
-
     public ReserveResponse reserve2(Order orderParam) {
         long lLoc = counter.incrementAndGet();
 
@@ -86,12 +82,12 @@ public class RestaurantReserveIntegration {
                                                          .withCustomerIdParam("asdgfdsf")
                                                          .withDueTimeParam(30)
                                                          .withMealsParam(orderParam.getMeals()
-                                                                                   .stream()
-                                                                                   .map(m -> Meal.builder()
-                                                                                                 .withMealParam(m.getMealName())
-                                                                                                 .withAmountParam(m.getAmount())
-                                                                                                 .build())
-                                                                                   .collect(Collectors.toList()))
+                                                                                      .stream()
+                                                                                      .map(m -> Meal.builder()
+                                                                                                    .withMealParam(m.getMealName())
+                                                                                                    .withAmountParam(m.getAmount())
+                                                                                                    .build())
+                                                                                      .collect(Collectors.toList()))
                                                          .build();
         ReserveResponse reserveResponseLoc = null;
 
@@ -131,12 +127,12 @@ public class RestaurantReserveIntegration {
                                                          .withCustomerIdParam("asdgfdsf")
                                                          .withDueTimeParam(30)
                                                          .withMealsParam(orderParam.getMeals()
-                                                                                   .stream()
-                                                                                   .map(m -> Meal.builder()
-                                                                                                 .withMealParam(m.getMealName())
-                                                                                                 .withAmountParam(m.getAmount())
-                                                                                                 .build())
-                                                                                   .collect(Collectors.toList()))
+                                                                                      .stream()
+                                                                                      .map(m -> Meal.builder()
+                                                                                                    .withMealParam(m.getMealName())
+                                                                                                    .withAmountParam(m.getAmount())
+                                                                                                    .build())
+                                                                                      .collect(Collectors.toList()))
                                                          .build();
         return restaurantIntegration.reserve(reserveRequestLoc);
     }

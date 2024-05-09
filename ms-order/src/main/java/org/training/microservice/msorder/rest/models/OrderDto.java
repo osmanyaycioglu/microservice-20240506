@@ -11,16 +11,16 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
+public class OrderDto {
     @NotBlank
-    @Size(min = 2,max = 20)
+    @Size(min = 2,max = 20,message = "isim {min} ile {max} arasında olmalı")
     private String name;
     @NotEmpty
     private String surname;
     private String phone;
-    private String address;
+    private String        address;
     @NotNull
-    private List<Meal> meals;
+    private List<MealDto> mealDtos;
     @Future
     private LocalDateTime dueTime;
 

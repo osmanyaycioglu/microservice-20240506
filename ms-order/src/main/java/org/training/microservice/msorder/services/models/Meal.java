@@ -1,4 +1,4 @@
-package org.training.microservice.msorder.rest.models;
+package org.training.microservice.msorder.services.models;
 
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
@@ -11,7 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Meal {
     private String mealName;
-    @DecimalMin("0")
-    @DecimalMax("10")
     private Double amount;
 }

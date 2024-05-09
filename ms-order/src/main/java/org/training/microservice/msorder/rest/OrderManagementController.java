@@ -2,12 +2,12 @@ package org.training.microservice.msorder.rest;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-import org.training.microservice.msorder.error.ErrorObj;
-import org.training.microservice.msorder.rest.models.Order;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.training.microservice.msorder.rest.models.OrderDto;
 import org.training.microservice.msorder.services.IOrderManagementService;
-import org.training.microservice.msorder.services.OrderManagementService;
 
 @RestController
 @RequestMapping("/api/v1/order/management")
@@ -17,24 +17,22 @@ public class OrderManagementController {
 
 
     @PostMapping("/place")
-    public String place(@RequestBody @Valid Order orderParam) {
-        return orderManagementService.place(orderParam);
+    public String place(@RequestBody @Valid OrderDto orderDtoParam) {
+        return orderManagementService.place(orderDtoParam);
     }
 
     @PostMapping("/place2")
-    public String place2(@RequestBody @Valid Order orderParam) {
-        return orderManagementService.place2(orderParam);
+    public String place2(@RequestBody @Valid OrderDto orderDtoParam) {
+        return orderManagementService.place2(orderDtoParam);
     }
 
     @PostMapping("/place3")
-    public String place3(@RequestBody @Valid Order orderParam) {
-        return orderManagementService.place3(orderParam);
+    public String place3(@RequestBody @Valid OrderDto orderDtoParam) {
+        return orderManagementService.place3(orderDtoParam);
     }
 
     @PostMapping("/suspend")
     public void suspend() {
     }
-
-
 
 }
