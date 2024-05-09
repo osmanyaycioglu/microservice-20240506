@@ -20,7 +20,7 @@ public class OrderDto {
     private String phone;
     private String        address;
     @NotNull
-    private List<MealDto> mealDtos;
+    private List<MealDto> meals;
     @Future
     private LocalDateTime dueTime;
 
