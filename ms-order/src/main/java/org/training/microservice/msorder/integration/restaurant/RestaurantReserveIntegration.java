@@ -4,13 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import com.netflix.discovery.shared.Application;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 import org.training.microservice.mscommon.error.ErrorObj;
-import org.training.microservice.msorder.rest.models.OrderDto;
 import org.training.microservice.msorder.services.models.Order;
 import org.training.microservice.msrestaurant.rest.models.Meal;
 import org.training.microservice.msrestaurant.rest.models.ReserveRequest;
@@ -120,7 +121,8 @@ public class RestaurantReserveIntegration {
         return reserveResponseLoc;
     }
 
-
+    @Retry(name = "name-reserve-int")
+    @CircuitBreaker(name = "circuit-reserve",fallbackMethod = "reserve3Fallback")
     public ReserveResponse reserve3(Order orderParam) {
 
         ReserveRequest reserveRequestLoc = ReserveRequest.builder()
@@ -135,6 +137,12 @@ public class RestaurantReserveIntegration {
                                                                                       .collect(Collectors.toList()))
                                                          .build();
         return restaurantIntegration.reserve(reserveRequestLoc);
+    }
+
+    public ReserveResponse reserve3Fallback(Order orderParam,Throwable throwableParam) {
+        System.out.println("Fallback");
+        return ReserveResponse.builder()
+                              .build();
     }
 
 }

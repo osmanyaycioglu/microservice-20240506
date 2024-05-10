@@ -1,0 +1,53 @@
+server:
+  error:
+    include-binding-errors: always
+    include-exception: true
+    include-message: always
+  port: ${MYPORT:10000}
+spring:
+  application:
+    name: order
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: false
+        max-retries-on-next-service-instance: 2
+        max-retries-on-same-service-instance: 0
+        retry-on-all-exceptions: false
+        retry-on-all-operations: false
+  config:
+    import: configserver:http://127.0.0.1:8888
+  profiles:
+    default: prof1
+resilience4j:
+  retry:
+    instances:
+      name-reserve-int:
+        base-config: config1
+        retry-exception-predicate: org.training.microservice.msorder.resilience4j.ReserveRetryChooser
+        result-predicate: org.training.microservice.msorder.resilience4j.ReserveReturnPredicate
+      name-restaurant-int:
+        base-config: config1
+        retry-exception-predicate: org.training.microservice.msorder.resilience4j.ReserveRetryChooser
+    configs:
+      config1:
+        max-attempts: 2
+        wait-duration: 1ms
+        exponential-backoff-multiplier: 2.0
+        exponential-max-wait-duration: 10ms
+  circuitbreaker:
+    instances:
+      circuit-reserve:
+        base-config: cb1
+    configs:
+      cb1:
+        sliding-window-type: count_based
+        sliding-window-size: 20
+        failure-rate-threshold: 30
+        minimum-number-of-calls: 10
+        slow-call-rate-threshold: 30
+        slow-call-duration-threshold: 100ms
+        wait-duration-in-open-state: 2s
+        automatic-transition-from-open-to-half-open-enabled: false
+        permitted-number-of-calls-in-half-open-state: 10
+        max-wait-duration-in-half-open-state: 2s

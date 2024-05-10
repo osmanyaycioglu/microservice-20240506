@@ -1,5 +1,6 @@
 package org.training.microservice.msorder;
 
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -17,6 +18,7 @@ import org.training.microservice.mscommon.error.FeignErrorConfig;
 @Import({ErrorConfig.class,
          FeignErrorConfig.class
 })
+@EnableRabbit
 public class MsOrderApplication {
 
     @Bean

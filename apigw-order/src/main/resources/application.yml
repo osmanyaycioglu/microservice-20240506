@@ -5,12 +5,17 @@ spring:
     import: configserver:http://127.0.0.1:8888
   cloud:
     gateway:
-      mvc:
         routes:
           - id: my-order-root1
             uri: lb://ORDER
             predicates:
-              - Path=api/v1/order/**
+              - Path=/api/v1/order/management/**
+            filters:
+              - name: Logging
+                args:
+                  message: osman
+                  preLog: true
+                  postLog: true
 server:
   port: ${MYPORT:9090}
 management:
