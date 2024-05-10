@@ -3,6 +3,7 @@ package org.training.microservice.msorder.rest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ import reactor.netty.http.server.HttpServerRequest;
 @RestController
 @RequestMapping("/api/v1/order/management")
 @RequiredArgsConstructor
+@RefreshScope
 public class OrderManagementController {
     private final IOrderManagementService orderManagementService;
 
