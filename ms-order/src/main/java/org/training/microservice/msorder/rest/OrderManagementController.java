@@ -2,6 +2,7 @@ package org.training.microservice.msorder.rest;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,13 @@ import reactor.netty.http.server.HttpServerRequest;
 public class OrderManagementController {
     private final IOrderManagementService orderManagementService;
 
+    @Value("${app.owner}")
+    private String owner;
+
+    @PostMapping("/test")
+    public String test() {
+        return owner;
+    }
 
     @PostMapping("/place")
     public String place(@RequestBody @Valid OrderDto orderDtoParam) {
